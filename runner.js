@@ -9,4 +9,5 @@ async function start() {
   await GameController.startGame()
 }
 
+
 start()
