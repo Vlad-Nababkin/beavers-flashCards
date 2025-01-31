@@ -1,26 +1,32 @@
 const ReadFile = require('./ReadDirAndFile')
 
 class QuestionModel {
-    constructor(topic){
-        this.topic = topic
-        this.questions = [];
-        this.correctAnswers
-
+    constructor(questions){
+        this.questions = questions
+        this.currentQuestionIndex = 0
+        this.correctAnswers = 0;
     }
-    async loadQuestions(num){
-     this.questions = await ReadFile.readDirFile(num);
+     getCurrentQuestions(){
+     return this.questions[this.currentQuestionIndex]
     }
-    async getQuestions(){
-     return this.questions[]
+    checkAnswer(answer){
+    const currentQuestion = this.getCurrentQuestions()
+    if (answer === currentQuestion.answer){
+        this.correctAnswers++;
+        return true;
     }
-    getCurrentQuestion(index){
-    return this.questions[index].question
+    return false
+    }
+    nextQuestion(){
+        this.currentQuestionIndex++;
+    }
+    getResults(){
+        return{
+        total: this.questions.length,
+        correct: this.correctAnswers,
+        }
     }
  
 }
-const aboba = new QuestionModel('topics/nighthawk_flashcard_data.txt')
-aboba.loadQuestions(1)
-
-console.log( aboba.getQuestions())
 
 module.exports = QuestionModel
