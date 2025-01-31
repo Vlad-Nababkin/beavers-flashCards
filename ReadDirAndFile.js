@@ -1,3 +1,4 @@
+const { log } = require('console')
 const fsp = require('fs/promises')
 const { EOL } = require('os')
 
@@ -18,6 +19,7 @@ class ReadFile{
     }
     
 }
+
 
 
 module.exports = ReadFile
