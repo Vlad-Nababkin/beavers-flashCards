@@ -2,11 +2,14 @@ const ReadFile = require('./ReadDirAndFile');
 const View = require('./UserView');
 const ThemModel = require('./ThemModel');
 const QuestionModel = require('./Question');
+const chalk = require('chalk');
 
 class GameController {
   static async startGame() {
     try {
+      const topics = await ReadFile.readDir();
       const themList = await ThemModel.themModel();
+
       const selectedThem = await View.selectTheme(themList);
       const questions = await ReadFile.readDirFile(selectedThem);
 
@@ -15,14 +18,18 @@ class GameController {
       while (questionModel.isGameOver()) {
         const currentQuestion = questionModel.getCurrentQuestions();
         const userAnswer = await View.askQuestion(currentQuestion.question);
-        questionModel.checkAnswer(userAnswer);
+        if (questionModel.checkAnswer(userAnswer)) {
+          console.log(chalk.green('Правильно!'));
+        } else {
+          console.log(chalk.red('Неправильно!'));
+        }
         questionModel.nextQuestion();
       }
 
       const result = questionModel.getResults();
       View.showResult(result);
     } catch (error) {
-      console.error('Произошла ошибка:', error.message);
+      console.error(chalk.red('Произошла ошибка:', error.message));
     }
   }
 }

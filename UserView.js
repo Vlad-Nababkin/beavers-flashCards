@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const { default: Choices } = require('inquirer/lib/objects/choices');
+const chalk = require('chalk');
 
 class View {
   static async selectTheme(themes) {
@@ -26,7 +27,7 @@ class View {
   }
 
   static showResult(results) {
-    console.log(`\nИгра окончена!`);
+    console.log(`\nИгра окончена!✅`);
     console.log(`Правильных ответов: ${results.correct} из ${results.total}`);
   }
 }

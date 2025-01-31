@@ -16,6 +16,7 @@ class QuestionModel {
     if (answer === currentQuestion.answer) {
       this.correctAnswers++;
       return true;
+      ;
     }
     return false;
   }
