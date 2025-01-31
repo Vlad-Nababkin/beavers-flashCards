@@ -1,4 +1,3 @@
-
 const fsp = require('fs/promises');
 const { EOL } = require('os');
 
@@ -12,6 +11,9 @@ class ReadFile {
   static async readDirFile(num) {
     try {
       const arrayFile = await this.readDir();
+      if (num < 1 || num > arrayFile.length) {
+        throw new Error('Неверный номер темы')
+      }
       const firstArray = await fsp.readFile(`./topics/${arrayFile[num - 1]}`, 'utf-8');
       const firstNormalArray = firstArray.split(EOL).filter((el) => el !== '');
       const result = [];
@@ -27,8 +29,6 @@ class ReadFile {
     }
   }
 }
-
-
 
 
 module.exports = ReadFile;
