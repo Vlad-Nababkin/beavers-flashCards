@@ -1,6 +1,7 @@
 const fsp = require('fs/promises');
 const { EOL } = require('os');
 
+
 class ReadFile {
   static async readDir() {
     return await fsp.readdir('./topics');
