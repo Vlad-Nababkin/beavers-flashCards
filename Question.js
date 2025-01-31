@@ -13,10 +13,9 @@ class QuestionModel {
 
   checkAnswer(answer) {
     const currentQuestion = this.getCurrentQuestions();
-    if (answer === currentQuestion.answer) {
+    if (answer.toLowerCase() === currentQuestion.answer) {
       this.correctAnswers++;
       return true;
-      ;
     }
     return false;
   }

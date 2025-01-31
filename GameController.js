@@ -4,12 +4,11 @@ const ThemModel = require('./ThemModel');
 const QuestionModel = require('./Question');
 const chalk = require('chalk');
 
+
 class GameController {
   static async startGame() {
     try {
-      const topics = await ReadFile.readDir();
       const themList = await ThemModel.themModel();
-
       const selectedThem = await View.selectTheme(themList);
       const questions = await ReadFile.readDirFile(selectedThem);
 
