@@ -15,7 +15,8 @@ class GameController {
       const questionModel = new QuestionModel(questions)
 
       while (questionModel.isGameOver()) {
-        const currentQuestion = questionModel.getCurrentQuestions()
+       const currentQuestion = questionModel.getCurrentQuestions();
+
         const userAnswer = await View.askQuestion(currentQuestion.question);
         if (questionModel.checkAnswer(userAnswer)) {
           console.log(chalk.green('Правильно!'))
@@ -24,7 +25,8 @@ class GameController {
           console.log(chalk.red('Неправильно!'))
           SoundManager.playWrongAnswer()
         }
-        questionModel.nextQuestion()
+        await new Promise(resolve => setTimeout(resolve, 1500))
+          questionModel.nextQuestion();
       }
 
       const result = questionModel.getResults()

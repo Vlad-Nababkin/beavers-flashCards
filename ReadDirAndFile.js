@@ -17,7 +17,7 @@ class ReadFile {
       const result = [];
       for (let i = 0; i < firstNormalArray.length; i += 2) {
         result.push({
-          question: `${firstNormalArray[i]}\n`,
+           question: `${firstNormalArray[i]}\n`,
           answer: `${firstNormalArray[i + 1]}`,
         });
       }
