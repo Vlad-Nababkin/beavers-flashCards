@@ -6,25 +6,23 @@ const QuestionModel = require('./Question');
 class GameController {
   static async startGame() {
     try {
-      const topics = await ReadFile.readDir();
       const themList = await ThemModel.themModel();
-
-      const selectedThem = await View.selectedThem(themList);
-      const questions = topics[selectedThem - 1];
+      const selectedThem = await View.selectTheme(themList);
+      const questions = await ReadFile.readDirFile(selectedThem);
 
       const questionModel = new QuestionModel(questions);
 
       while (questionModel.isGameOver()) {
-        const currentQuestion = questionModel.getCurrentQuestion();
-        const userAnswer = await View.askQuestion(currentQuestion.questions);
+        const currentQuestion = questionModel.getCurrentQuestions();
+        const userAnswer = await View.askQuestion(currentQuestion.question);
         questionModel.checkAnswer(userAnswer);
         questionModel.nextQuestion();
       }
 
-      const result = questionModel.getResult();
+      const result = questionModel.getResults();
       View.showResult(result);
     } catch (error) {
-      console.error('Произошла ошибка:', error.massage);
+      console.error('Произошла ошибка:', error.message);
     }
   }
 }

@@ -24,6 +24,10 @@ class QuestionModel {
     this.currentQuestionIndex++;
   }
 
+  isGameOver() {
+    return this.currentQuestionIndex < this.questions.length;
+  }
+
   getResults() {
     return {
       total: this.questions.length,
