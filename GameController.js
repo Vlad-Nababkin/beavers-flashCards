@@ -3,6 +3,7 @@ const View = require('./UserView');
 const ThemModel = require('./ThemModel');
 const QuestionModel = require('./Question');
 const chalk = require('chalk');
+const SoundManager = require('./SoundManager');
 
 
 class GameController {
@@ -19,8 +20,10 @@ class GameController {
         const userAnswer = await View.askQuestion(currentQuestion.question);
         if (questionModel.checkAnswer(userAnswer)) {
           console.log(chalk.green('Правильно!'));
+          SoundManager.playRightAnswer();
         } else {
           console.log(chalk.red('Неправильно!'));
+          SoundManager.playWrongAnswer();
         }
         questionModel.nextQuestion();
       }
