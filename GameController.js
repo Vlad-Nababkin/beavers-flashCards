@@ -1,7 +1,7 @@
 const ReadFile = require('./ReadDirAndFile');
 const View = require('./UserView');
 const ThemModel = require('./ThemModel');
-const QuestionModel = require('./QuestionModel');
+const QuestionModel = require('./Question');
 
 class GameController {
   static async startGame() {
